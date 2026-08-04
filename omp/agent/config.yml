@@ -1,0 +1,90 @@
+setupVersion: 1
+modelRoles: 
+  advisor: anthropic/claude-sonnet-5:low
+  default: deepseek/deepseek-v4-flash:max
+  smol: deepseek/deepseek-v4-flash:max
+  slow: anthropic/claude-opus-5:max
+  plan: deepseek/deepseek-v4-flash:max
+  vision: anthropic/claude-sonnet-5:med
+  designer: deepseek/deepseek-v4-flash:max
+  commit: deepseek/deepseek-v4-flash:max
+  task: deepseek/deepseek-v4-flash:max
+  tiny: anthropic/claude-haiku-4-5
+  smart: anthropic/claude-fable-5:xhigh
+defaultThinkingLevel: auto
+terminal: 
+  showProgress: true
+display: 
+  cacheMissMarker: true
+tier: 
+  anthropic: none
+disabledProviders: 
+  - claude
+advisor: 
+  enabled: true
+  syncBacklog: "1"
+  immuneTurns: 1
+astGrep: 
+  enabled: true
+statusLine: 
+  preset: custom
+  separator: powerline
+  sessionAccent: true
+  transparent: false
+  leftSegments: 
+    - model
+    - path
+    - session
+    - git
+    - goal
+  rightSegments: 
+    - session_name
+    - context_pct
+    - context_total
+    - token_total
+    - cache_hit
+  segmentOptions: 
+    model: 
+      showThinkingLevel: true
+    path: 
+      abbreviate: true
+      maxLength: 24
+      stripWorkPrefix: true
+    git: 
+      showBranch: true
+      showStaged: false
+      showUnstaged: false
+      showUntracked: false
+    goal: 
+      maxLength: 80
+  compactThinkingLevel: false
+  showHookStatus: true
+task: 
+  eager: always
+  maxConcurrency: 16
+  enableLsp: true
+autolearn: 
+  enabled: true
+  autoContinue: true
+secrets: 
+  enabled: true
+steeringMode: all
+autoResume: true
+checkpoint: 
+  enabled: true
+github: 
+  enabled: true
+tui: 
+  tight: false
+  scrollbackRebuild: true
+browser: 
+  headless: false
+followUpMode: all
+stt: 
+  modelName: parakeet
+  enabled: false
+cycleOrder: 
+  - default
+  - tiny
+  - smart
+  - slow
