@@ -10,8 +10,9 @@ link() { # link <target> <linkpath>
   local target="$1" path="$2"
   mkdir -p "$(dirname "$path")"
   if [ -e "$path" ] && [ ! -L "$path" ]; then
-    cp "$path" "$path.pre-dotfiles"
-    echo "backed up $path -> $path.pre-dotfiles"
+    if [ -e "$path.pre-dotfiles" ]; then rm -rf "$path.pre-dotfiles"; fi
+    mv "$path" "$path.pre-dotfiles"
+    echo "moved $path -> $path.pre-dotfiles"
   fi
   ln -sfn "$target" "$path"
 }
