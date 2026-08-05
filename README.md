@@ -32,7 +32,7 @@ What it does:
 
 - symlinks `config.yml`, `AGENTS.md`, `RULES.md`, `skills/*`, and `ponytail/config.json` into place (existing real files are moved to `*.pre-dotfiles` once)
 - adds both plugin marketplaces and installs `ponytail@ponytail` + `omp-sub-burndown-indicator@nszceta` (skipped when already present)
-- installs an `omp()` shell hook so `omp --update` pulls this repo, re-runs install.sh, then updates omp itself
+- installs an `omp()` shell hook so `omp --update` commits local edits, merges them with origin/main and pushes, re-runs install.sh, then updates omp itself
 - `RULES.md` is a union-merge file (`.gitattributes`): if two machines add rules on the same lines, sync keeps both instead of aborting
 - honors `PI_CODING_AGENT_DIR` if you relocate the agent dir
 
