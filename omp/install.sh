@@ -25,6 +25,15 @@ for s in "$REPO"/omp/agent/skills/*; do
   [ -e "$s" ] || continue
   link "$s" "$AGENT/skills/$(basename "$s")"
 done
+# drop links to skills that no longer exist in the repo (ours, dangling only)
+for s in "$AGENT"/skills/*; do
+  [ -L "$s" ] || continue
+  case "$(readlink "$s")" in
+    "$REPO"/*)
+      [ -e "$s" ] || { rm -f "$s"; echo "removed stale skill link $s"; }
+      ;;
+  esac
+done
 link "$REPO/ponytail/config.json" "$HOME/.config/ponytail/config.json"
 
 # --- plugins (idempotent: add/install only when absent) ---------------------
