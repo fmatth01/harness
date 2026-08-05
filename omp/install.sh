@@ -36,3 +36,32 @@ omp plugin list | grep -q 'ponytail@ponytail' || omp plugin install ponytail@pon
 
 echo "--- installed plugins:"
 omp plugin list
+
+# --- `omp --update` hook (idempotent: regenerates the marked rc block) ------
+rc=""
+case "${SHELL##*/}" in
+  zsh)  rc="$HOME/.zshrc" ;;
+  bash) rc="$HOME/.bashrc" ;;
+esac
+if [ -n "$rc" ]; then
+  touch "$rc"
+  tmp="$(mktemp)"
+  awk -v b='# >>> omp-harness-update >>>' -v e='# <<< omp-harness-update <<<' \
+    '$0==b{f=1} !f{print} $0==e{f=0}' "$rc" > "$tmp"
+  cat >> "$tmp" <<EOF
+
+# >>> omp-harness-update >>>
+# Managed by $REPO/omp/install.sh — re-run install.sh to regenerate.
+omp() {
+  case "\$1" in
+    --update|update) "$REPO/omp/update.sh" ;;
+    *) command omp "\$@" ;;
+  esac
+}
+# <<< omp-harness-update <<<
+EOF
+  mv "$tmp" "$rc"
+  echo "installed omp() update hook in $rc"
+else
+  echo "unsupported shell ${SHELL##*/} — omp --update alias not installed"
+fi

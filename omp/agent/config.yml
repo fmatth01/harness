@@ -87,6 +87,6 @@ cycleOrder:
   - tiny
   - smart
   - slow
-hideThinkingBlock: false
+hideThinkingBlock: true
 lsp: 
   enabled: true
