@@ -38,11 +38,11 @@ statusLine:
     - git
     - subagents
   rightSegments: 
-    - session_name
     - context_pct
     - cost
     - cache_hit
     - token_total
+    - session_name
   segmentOptions: 
     model: 
       showThinkingLevel: true
