@@ -9,7 +9,7 @@ modelRoles:
   designer: deepseek/deepseek-v4-flash:max
   commit: deepseek/deepseek-v4-flash:max
   task: deepseek/deepseek-v4-flash:max
-  tiny: anthropic/claude-haiku-4-5
+  tiny: deepseek/deepseek-v4-flash
   smart: anthropic/claude-fable-5:xhigh
 defaultThinkingLevel: auto
 terminal: 
@@ -19,7 +19,7 @@ display:
 tier: 
   anthropic: none
 disabledProviders: 
-  - claude
+  []
 advisor: 
   enabled: true
   syncBacklog: "1"
@@ -28,21 +28,21 @@ astGrep:
   enabled: true
 statusLine: 
   preset: custom
-  separator: powerline
+  separator: powerline-thin
   sessionAccent: true
   transparent: false
   leftSegments: 
     - model
+    - mode
     - path
-    - session
     - git
-    - goal
+    - subagents
   rightSegments: 
     - session_name
     - context_pct
-    - context_total
-    - token_total
+    - cost
     - cache_hit
+    - token_total
   segmentOptions: 
     model: 
       showThinkingLevel: true
@@ -52,11 +52,9 @@ statusLine:
       stripWorkPrefix: true
     git: 
       showBranch: true
-      showStaged: false
-      showUnstaged: false
-      showUntracked: false
-    goal: 
-      maxLength: 80
+      showStaged: true
+      showUnstaged: true
+      showUntracked: true
   compactThinkingLevel: false
   showHookStatus: true
 task: 
@@ -65,7 +63,8 @@ task:
   enableLsp: true
 autolearn: 
   enabled: true
-  autoContinue: true
+  autoContinue: false
+  minToolCalls: 20
 secrets: 
   enabled: true
 steeringMode: all
@@ -82,9 +81,12 @@ browser:
 followUpMode: all
 stt: 
   modelName: parakeet
-  enabled: false
+  enabled: true
 cycleOrder: 
   - default
   - tiny
   - smart
   - slow
+hideThinkingBlock: false
+lsp: 
+  enabled: true
