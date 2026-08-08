@@ -36,6 +36,15 @@ for s in "$AGENT"/skills/*; do
 done
 link "$REPO/ponytail/config.json" "$HOME/.config/ponytail/config.json"
 
+# --- fonts (nerd glyphs for the status line; idempotent) --------------------
+if command -v brew >/dev/null 2>&1; then
+  if ! brew list --cask font-symbols-only-nerd-font >/dev/null 2>&1; then
+    brew install --cask font-symbols-only-nerd-font
+  fi
+else
+  echo "brew not found — skipping nerd font install; grab Symbols Nerd Font from https://www.nerdfonts.com/font-downloads"
+fi
+
 # --- plugins (idempotent: add/install only when absent) ---------------------
 command -v omp >/dev/null 2>&1 || { echo "omp not on PATH — install omp first"; exit 1; }
 omp plugin marketplace list | grep -q nszceta  || omp plugin marketplace add https://github.com/nszceta/omp-sub-burndown-indicator.git

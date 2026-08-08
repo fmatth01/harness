@@ -21,7 +21,7 @@ Not included (machine-local by design): credentials (`~/.omp/agent/agent.db`), s
 
 ## Install on a new machine
 
-Prerequisites: omp installed, git identity set (`git config --global user.name/email`).
+Prerequisites: omp installed, git identity set (`git config --global user.name/email`). Homebrew is optional — it's used to install the Symbols Nerd Font (status-line icons) and is skipped when absent.
 
 ```sh
 git clone git@github.com:fmatth01/harness.git ~/harness
@@ -31,7 +31,7 @@ git clone git@github.com:fmatth01/harness.git ~/harness
 What it does:
 
 - symlinks `config.yml`, `AGENTS.md`, `RULES.md`, `skills/*`, and `ponytail/config.json` into place (existing real files are moved to `*.pre-dotfiles` once)
-- adds both plugin marketplaces and installs `ponytail@ponytail` + `omp-sub-burndown-indicator@nszceta` (skipped when already present)
+- installs the Symbols Nerd Font via Homebrew (when present) so status-line icons render, plus both plugin marketplaces and installs `ponytail@ponytail` + `omp-sub-burndown-indicator@nszceta` (skipped when already present)
 - installs an `omp()` shell hook so `omp --update` commits local edits, merges them with origin/main and pushes, re-runs install.sh, then updates omp itself
 - `RULES.md` is a union-merge file (`.gitattributes`): if two machines add rules on the same lines, sync keeps both instead of aborting
 - honors `PI_CODING_AGENT_DIR` if you relocate the agent dir
