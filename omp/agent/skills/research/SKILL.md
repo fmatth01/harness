@@ -1,7 +1,6 @@
 ---
 name: research
 description: Use this skill when the user wants to inventory existing solutions, libraries, papers, or prior art related to a problem. Triggers on phrases like "is there a library for...", "how do people usually solve...", "what's the standard approach to...", "what's been written about...", "find prior art for...". Spawns a subagent to do the actual searching, then returns a structured inventory. Does NOT recommend, rank, or pick winners — for that, defer to the approach-eval skill.
-model: claude-sonnet-4-6
 ---
 
 # Research: prior-art inventory
