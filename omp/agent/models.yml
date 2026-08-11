@@ -1,0 +1,10 @@
+providers:
+  langgraph:
+    baseUrl: http://127.0.0.1:8000/v1
+    api: openai-completions
+    auth: none
+    models:
+      - id: calculator-agent
+        name: LangGraph Calculator Agent (local)
+        contextWindow: 32768
+        maxTokens: 4096
