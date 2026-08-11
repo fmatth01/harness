@@ -10,9 +10,17 @@ omp/
     config.yml    settings (modelRoles, statusLine, task, …)
     AGENTS.md     global behavioral guidelines
     RULES.md      sticky rules
+    models.yml    extra model providers (langgraph calculator agent)
     skills/       user skills (approach-eval, research)
   install.sh      idempotent installer / re-linker
+  pull-models.sh  OPT-IN Ollama model downloads (~59GB; install.sh never auto-downloads)
   update.sh       `omp --update` handler (git pull + re-install + omp update)
+tmux/
+  tmux.conf       tmux config (tpm + catppuccin + resurrect/continuum + yank)
+docs/
+  local-llms.md   local LLM field for 32GB M1 Pro (models, runtimes, pitfalls)
+  tmux.md         tmux ecosystem, terminal/theme/font evaluation, cheat sheet
+  langgraph.md    LangChain/LangGraph explainer + local quickstart
 ponytail/
   config.json     ponytail extension preferences
 ```
@@ -21,7 +29,7 @@ Not included (machine-local by design): credentials (`~/.omp/agent/agent.db`), s
 
 ## Install on a new machine
 
-Prerequisites: omp installed, git identity set (`git config --global user.name/email`). Homebrew is optional — it's used to install the Symbols Nerd Font (status-line icons) and is skipped when absent.
+Prerequisites: omp installed, git identity set (`git config --global user.name/email`). Homebrew is optional — it's used to install the JetBrains Mono Nerd Font (status-line icons), tmux, and is skipped when absent.
 
 ```sh
 git clone git@github.com:fmatth01/harness.git ~/harness
@@ -30,8 +38,11 @@ git clone git@github.com:fmatth01/harness.git ~/harness
 
 What it does:
 
-- symlinks `config.yml`, `AGENTS.md`, `RULES.md`, `skills/*`, and `ponytail/config.json` into place (existing real files are moved to `*.pre-dotfiles` once)
-- installs the Symbols Nerd Font via Homebrew (when present) so status-line icons render, plus both plugin marketplaces and installs `ponytail@ponytail` + `omp-sub-burndown-indicator@nszceta` (skipped when already present)
+- symlinks `config.yml`, `AGENTS.md`, `RULES.md`, `models.yml`, `skills/*`, and `ponytail/config.json` into place (existing real files are moved to `*.pre-dotfiles` once)
+- installs the JetBrains Mono Nerd Font via Homebrew (when present) so status-line icons render, plus both plugin marketplaces and installs `ponytail@ponytail` + `omp-sub-burndown-indicator@nszceta` (skipped when already present)
+- installs tmux (upgrades to 3.7 when present), clones tpm, and symlinks `tmux/tmux.conf` — plugins install on the first `tmux` run
+- sets `VISUAL`/`EDITOR` in the shell rc when unset (defaults to `code --wait` when VS Code is installed, else `vim`)
+- prints a pointer to `omp/pull-models.sh` — local LLM models are downloaded ONLY on demand (install.sh never auto-pulls them)
 - installs an `omp()` shell hook so `omp --update` commits local edits, merges them with origin/main and pushes, re-runs install.sh, then updates omp itself
 - `RULES.md` is a union-merge file (`.gitattributes`): if two machines add rules on the same lines, sync keeps both instead of aborting
 - honors `PI_CODING_AGENT_DIR` if you relocate the agent dir

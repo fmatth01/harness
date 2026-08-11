@@ -21,6 +21,7 @@ link() { # link <target> <linkpath>
 link "$REPO/omp/agent/config.yml" "$AGENT/config.yml"
 link "$REPO/omp/agent/AGENTS.md"  "$AGENT/AGENTS.md"
 link "$REPO/omp/agent/RULES.md"   "$AGENT/RULES.md"
+link "$REPO/omp/agent/models.yml" "$AGENT/models.yml"
 for s in "$REPO"/omp/agent/skills/*; do
   [ -e "$s" ] || continue
   link "$s" "$AGENT/skills/$(basename "$s")"
@@ -37,13 +38,29 @@ done
 link "$REPO/ponytail/config.json" "$HOME/.config/ponytail/config.json"
 
 # --- fonts (nerd glyphs for the status line; idempotent) --------------------
+FONT_CASK=font-jetbrains-mono-nerd-font
 if command -v brew >/dev/null 2>&1; then
-  if ! brew list --cask font-symbols-only-nerd-font >/dev/null 2>&1; then
-    brew install --cask font-symbols-only-nerd-font
+  if ! brew list --cask "$FONT_CASK" >/dev/null 2>&1; then
+    brew install --cask "$FONT_CASK"
   fi
+  # replaced font-symbols-only-nerd-font — icons now come from the family
+  brew list --cask font-symbols-only-nerd-font >/dev/null 2>&1 && brew uninstall --cask font-symbols-only-nerd-font
 else
-  echo "brew not found — skipping nerd font install; grab Symbols Nerd Font from https://www.nerdfonts.com/font-downloads"
+  echo "brew not found — skipping nerd font install; grab JetBrains Mono Nerd Font from https://www.nerdfonts.com/font-downloads"
 fi
+
+# --- tmux (session manager; idempotent) -------------------------------------
+if command -v brew >/dev/null 2>&1; then
+  if ! command -v tmux >/dev/null 2>&1; then
+    brew install tmux
+  elif ! brew list --versions tmux | grep -q ' 3\.7'; then
+    brew upgrade tmux
+  fi
+fi
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+  git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+fi
+link "$REPO/tmux/tmux.conf" "$HOME/.tmux.conf"
 
 # --- plugins (idempotent: add/install only when absent) ---------------------
 command -v omp >/dev/null 2>&1 || { echo "omp not on PATH — install omp first"; exit 1; }
@@ -80,6 +97,17 @@ omp() {
 EOF
   mv "$tmp" "$rc"
   echo "installed omp() update hook in $rc"
+
+  # --- editor env (set once, only when unset) ---
+  if ! grep -qE '^(export )?(VISUAL|EDITOR)=' "$rc" 2>/dev/null; then
+    if command -v code >/dev/null 2>&1; then ed="code --wait"; else ed="vim"; fi
+    printf "\nexport VISUAL='%s'\nexport EDITOR='%s'\n" "$ed" "$ed" >> "$rc"
+    echo "set VISUAL/EDITOR=$ed in $rc"
+  fi
 else
   echo "unsupported shell ${SHELL##*/} — omp --update alias not installed"
 fi
+
+# --- local LLM models (opt-in on purpose: ~59GB) ----------------------------
+echo "Local LLM models are NOT downloaded automatically. When you want them, run:"
+echo "  $REPO/omp/pull-models.sh"
