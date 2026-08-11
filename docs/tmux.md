@@ -174,6 +174,8 @@ This is the exact config we will install (tmux.conf): prefix **C-a**, tpm plugin
 | `C-a` `C-r` | **Restore** the session (tmux-resurrect; continuum also restores automatically). |
 | `C-a` `C-a` | **Literal C-a** to the shell — "jump to start of line" works as usual. |
 | `C-a` `?` | List all key bindings. |
+| Wheel up / `PgUp` | **Scroll up** through the pane's history (copy mode; `q` exits, scrolling to the bottom exits too). |
+| `C-a` `[` | Enter copy mode manually (arrows/`h`/`j`/`k`/`l` move, `q` exits). |
 | `tmux attach` | Re-attach to your session after a disconnect (sessions survive — see section 1). |
 
 Two notes:
