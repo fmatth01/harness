@@ -10,7 +10,7 @@ modelRoles:
   commit: deepseek/deepseek-v4-flash:max
   task: deepseek/deepseek-v4-flash:max
   tiny: deepseek/deepseek-v4-flash
-  smart: anthropic/claude-fable-5:xhigh
+  smart: deepseek/deepseek-v4-pro:max
 defaultThinkingLevel: auto
 terminal: 
   showProgress: true
