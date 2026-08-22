@@ -1,4 +1,4 @@
-setupVersion: 1
+setupVersion: 2
 modelRoles: 
   advisor: anthropic/claude-sonnet-5:low
   default: deepseek/deepseek-v4-flash:max
