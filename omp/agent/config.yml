@@ -1,5 +1,5 @@
 setupVersion: 2
-modelRoles: 
+modelRoles:
   advisor: anthropic/claude-sonnet-5:low
   default: deepseek/deepseek-v4-flash:max
   smol: deepseek/deepseek-v4-pro:max
@@ -12,81 +12,81 @@ modelRoles:
   tiny: deepseek/deepseek-v4-flash
   smart: deepseek/deepseek-v4-pro:max
 defaultThinkingLevel: auto
-terminal: 
+terminal:
   showProgress: true
-display: 
+display:
   cacheMissMarker: true
-tier: 
+tier:
   anthropic: none
-disabledProviders: 
+disabledProviders:
   []
-advisor: 
+advisor:
   enabled: true
   syncBacklog: "1"
   immuneTurns: 1
-astGrep: 
+astGrep:
   enabled: true
-statusLine: 
+statusLine:
   preset: custom
   separator: powerline-thin
   sessionAccent: true
   transparent: false
-  leftSegments: 
+  leftSegments:
     - model
     - mode
     - path
     - git
     - subagents
-  rightSegments: 
+  rightSegments:
     - context_pct
     - cost
     - cache_hit
     - token_total
     - session_name
-  segmentOptions: 
-    model: 
+  segmentOptions:
+    model:
       showThinkingLevel: true
-    path: 
+    path:
       abbreviate: true
       maxLength: 24
       stripWorkPrefix: true
-    git: 
+    git:
       showBranch: true
       showStaged: true
       showUnstaged: true
       showUntracked: true
   compactThinkingLevel: false
   showHookStatus: true
-task: 
+task:
   eager: always
   maxConcurrency: 16
   enableLsp: true
-autolearn: 
+autolearn:
   enabled: true
   autoContinue: false
   minToolCalls: 20
-secrets: 
+secrets:
   enabled: true
 steeringMode: all
 autoResume: true
-checkpoint: 
+checkpoint:
   enabled: true
-github: 
+github:
   enabled: true
-tui: 
+tui:
   tight: false
   scrollbackRebuild: true
-browser: 
+browser:
   headless: false
 followUpMode: all
-stt: 
+stt:
   modelName: parakeet
   enabled: true
-cycleOrder: 
+cycleOrder:
   - default
   - tiny
   - smart
   - slow
 hideThinkingBlock: false
-lsp: 
+lsp:
   enabled: true
