@@ -35,6 +35,36 @@ for s in "$AGENT"/skills/*; do
       ;;
   esac
 done
+for s in "$REPO"/omp/agent/rules/*; do
+  [ -e "$s" ] || continue
+  link "$s" "$AGENT/rules/$(basename "$s")"
+done
+# drop links to rules that no longer exist in the repo (ours, dangling only)
+for s in "$AGENT"/rules/*; do
+  [ -L "$s" ] || continue
+  case "$(readlink "$s")" in
+    "$REPO"/*)
+      [ -e "$s" ] || { rm -f "$s"; echo "removed stale rule link $s"; }
+      ;;
+  esac
+done
+# warn about skills/rules not mirrored from the repo (machine-local drift)
+drift() { # drift <dir>: warn about entries not mirrored from the repo
+  for e in "$1"/*; do
+    [ -e "$e" ] || continue
+    b="$(basename "$e")"
+    if [ -L "$e" ]; then
+      case "$(readlink "$e")" in
+        "$REPO"/*) ;;
+        *) echo "WARN: $e is a symlink outside the dotfiles repo";;
+      esac
+    elif [ "$b" != ".DS_Store" ] && [ "${b##*.}" != "pre-dotfiles" ]; then
+      echo "WARN: $e is machine-local (not a repo symlink)"
+    fi
+  done
+}
+drift "$AGENT/skills"
+drift "$AGENT/rules"
 link "$REPO/ponytail/config.json" "$HOME/.config/ponytail/config.json"
 
 # --- fonts (nerd glyphs for the status line; idempotent) --------------------
