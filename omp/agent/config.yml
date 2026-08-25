@@ -2,9 +2,9 @@ setupVersion: 2
 modelRoles: 
   advisor: anthropic/claude-sonnet-5:low
   default: deepseek/deepseek-v4-flash:max
-  smol: deepseek/deepseek-v4-flash:max
+  smol: deepseek/deepseek-v4-pro:max
   slow: anthropic/claude-opus-5:max
-  plan: deepseek/deepseek-v4-flash:max
+  plan: deepseek/deepseek-v4-pro:max
   vision: anthropic/claude-sonnet-5:med
   designer: deepseek/deepseek-v4-flash:max
   commit: deepseek/deepseek-v4-flash:max
