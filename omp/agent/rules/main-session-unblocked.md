@@ -1,5 +1,5 @@
 ---
-name: supervised-long-runs
+name: main-session-unblocked
 description: "Never block the main session for more than 15 seconds — any work expected to take longer must run in the background (hub/tmux supervised, async bash, or a delegated subagent); waits must watch for failure as well as success so runs never stop silently"
 condition:
   - "for (vid|video|sid) in (VIDS|VIDEOS|VIDEO_IDS|videos|video_ids)"
