@@ -18,6 +18,12 @@ When editing existing code:
 - Match existing style, even if you'd do it differently.
 - If you notice unrelated dead code, surface it clearly — don't delete it.
 
+Rewrites:
+- Prefer small targeted edits for small changes; reserve full-file rewrites for wholesale restructures.
+- Before any full-file rewrite, snapshot the original (cp to /tmp, or git stash-style), reconstruct, diff the reconstruction against the snapshot, then run. The diff catches dropped blocks and transcription drift at zero cost.
+- A rewrite must prove equivalence to what it replaced: byte-identical or behaviorally verified outputs.
+- Verify with stderr visible. A silent-crash run is a failed run, not a passing one. When diffing regenerated outputs, save the old copies before overwriting — comparing against stale files a crashed run never touched is false evidence.
+
 ## 3. Goal-Driven Execution
 Define success criteria. Loop until verified.
 
