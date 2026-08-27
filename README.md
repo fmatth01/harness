@@ -49,7 +49,7 @@ What it does:
 - installs tmux (upgrades to 3.7 when present), clones tpm, and symlinks `tmux/tmux.conf` — plugins install on the first `tmux` run
 - sets `VISUAL`/`EDITOR` in the shell rc when unset (defaults to `code --wait` when VS Code is installed, else `vim`)
 - prints a pointer to `omp/pull-models.sh` — local LLM models are downloaded ONLY on demand (install.sh never auto-pulls them)
-- installs pyright, ruff, typescript-language-server, biome, yaml-language-server, bash-language-server (Homebrew) plus vscode-langservers-extracted and typescript (npm -g) so LSP diagnostics/navigation work the same on every machine
+- installs pyright, ruff, typescript-language-server, biome, yaml-language-server, bash-language-server (Homebrew) plus vscode-langservers-extracted and typescript (npm -g, skipped with a WARN when npm is absent) so LSP diagnostics/navigation work the same on every machine
 - installs an `omp()` shell hook so `omp --update` commits local edits, merges them with origin/main and pushes, re-runs install.sh, then updates omp itself
 - `RULES.md` is a union-merge file (`.gitattributes`): if two machines add rules on the same lines, sync keeps both instead of aborting
 - honors `PI_CODING_AGENT_DIR` if you relocate the agent dir

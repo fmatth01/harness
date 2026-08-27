@@ -101,8 +101,12 @@ if command -v brew >/dev/null 2>&1; then
     brew list "$f" >/dev/null 2>&1 || brew install "$f"
   done
 fi
-command -v vscode-json-language-server >/dev/null 2>&1 || npm install -g vscode-langservers-extracted
-command -v tsc >/dev/null 2>&1 || npm install -g typescript
+if command -v npm >/dev/null 2>&1; then
+  command -v vscode-json-language-server >/dev/null 2>&1 || npm install -g vscode-langservers-extracted
+  command -v tsc >/dev/null 2>&1 || npm install -g typescript
+else
+  echo "WARN: npm not found — skipping JS/TS LSP servers (vscode-langservers-extracted, typescript)"
+fi
 
 # --- plugins (idempotent: add/install only when absent) ---------------------
 command -v omp >/dev/null 2>&1 || { echo "omp not on PATH — install omp first"; exit 1; }
