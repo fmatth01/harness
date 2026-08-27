@@ -22,6 +22,9 @@ link "$REPO/omp/agent/config.yml" "$AGENT/config.yml"
 link "$REPO/omp/agent/AGENTS.md"  "$AGENT/AGENTS.md"
 link "$REPO/omp/agent/RULES.md"   "$AGENT/RULES.md"
 link "$REPO/omp/agent/models.yml" "$AGENT/models.yml"
+for f in WATCHDOG.yml SYSTEM.md lsp.json; do
+  [ -e "$REPO/omp/agent/$f" ] && link "$REPO/omp/agent/$f" "$AGENT/$f"
+done
 for s in "$REPO"/omp/agent/skills/*; do
   [ -e "$s" ] || continue
   link "$s" "$AGENT/skills/$(basename "$s")"
@@ -91,6 +94,15 @@ if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
   git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 fi
 link "$REPO/tmux/tmux.conf" "$HOME/.tmux.conf"
+
+# --- LSP servers (Python/TS/JS/JSON/YAML/Bash; idempotent) -------------------
+if command -v brew >/dev/null 2>&1; then
+  for f in ruff pyright typescript-language-server biome yaml-language-server bash-language-server; do
+    brew list "$f" >/dev/null 2>&1 || brew install "$f"
+  done
+fi
+command -v vscode-json-language-server >/dev/null 2>&1 || npm install -g vscode-langservers-extracted
+command -v tsc >/dev/null 2>&1 || npm install -g typescript
 
 # --- plugins (idempotent: add/install only when absent) ---------------------
 command -v omp >/dev/null 2>&1 || { echo "omp not on PATH — install omp first"; exit 1; }

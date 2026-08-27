@@ -1,0 +1,25 @@
+{
+  "servers": {
+    "pyright": {
+      "rootMarkers": ["*.py", "pyproject.toml", "pyrightconfig.json", "setup.py", "setup.cfg", "requirements.txt", "Pipfile"]
+    },
+    "ruff": {
+      "rootMarkers": ["*.py", "pyproject.toml", "ruff.toml", ".ruff.toml"]
+    },
+    "typescript-language-server": {
+      "rootMarkers": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.mjs", "*.cjs", "package.json", "tsconfig.json", "jsconfig.json"]
+    },
+    "biome": {
+      "rootMarkers": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.mjs", "*.cjs", "biome.json", "biome.jsonc"]
+    },
+    "vscode-json-language-server": {
+      "rootMarkers": ["*.json", "*.jsonc", "package.json", ".git"]
+    },
+    "yamlls": {
+      "rootMarkers": ["*.yaml", "*.yml", ".git"]
+    },
+    "bashls": {
+      "rootMarkers": ["*.sh", "*.bash", "*.zsh", ".git"]
+    }
+  }
+}
