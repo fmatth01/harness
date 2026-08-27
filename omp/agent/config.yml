@@ -1,10 +1,10 @@
 setupVersion: 2
 modelRoles:
   advisor: anthropic/claude-sonnet-5:low
-  default: deepseek/deepseek-v4-flash:max
-  smol: deepseek/deepseek-v4-pro:max
+  default: deepseek/deepseek-v4-pro:max
+  smol: deepseek/deepseek-v4-flash-vision-exp:max
   slow: anthropic/claude-opus-5:max
-  plan: deepseek/deepseek-v4-pro:max
+  plan: openai-codex/gpt-5.6-sol:max
   vision: anthropic/claude-sonnet-5:med
   designer: deepseek/deepseek-v4-flash:max
   commit: deepseek/deepseek-v4-flash:max
