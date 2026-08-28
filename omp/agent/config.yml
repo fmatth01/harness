@@ -61,7 +61,7 @@ task:
   maxConcurrency: 16
   enableLsp: true
   agentAdvisor:
-    task: "on"
+    task: "off"
 autolearn:
   enabled: true
   autoContinue: false
