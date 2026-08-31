@@ -1,14 +1,14 @@
 setupVersion: 2
 modelRoles:
   advisor: anthropic/claude-sonnet-5:low
-  default: deepseek/deepseek-v4-pro:max
-  smol: deepseek/deepseek-v4-flash:max
+  default: zai/glm-5.3-flash:max
+  smol: zai/glm-5.3-flash:max
   slow: anthropic/claude-opus-5:max
   plan: openai-codex/gpt-5.6-sol:high
-  designer: deepseek/deepseek-v4-flash:max
-  commit: deepseek/deepseek-v4-flash:max
-  task: deepseek/deepseek-v4-flash:max
-  tiny: deepseek/deepseek-v4-flash
+  designer: anthropic/claude-sonnet-5:medium
+  commit: zai/glm-5.3-flash:max
+  task: zai/glm-5.3-flash:max
+  tiny: zai/glm-5.3-flash:max
   vision: anthropic/claude-sonnet-5:high
 defaultThinkingLevel: auto
 terminal:
@@ -86,7 +86,6 @@ stt:
 cycleOrder:
   - default
   - tiny
-  - smart
   - slow
 hideThinkingBlock: false
 lsp:
