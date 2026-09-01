@@ -91,3 +91,5 @@ hideThinkingBlock: false
 lsp:
   enabled: true
   lazy: false
+dev:
+  autoqaConsent: granted
